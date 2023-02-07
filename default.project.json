@@ -1,0 +1,15 @@
+{
+  "name": "Dragonfly",
+  "tree": {
+    "$className": "DataModel",
+    "ReplicatedStorage": {
+      "$path": "src/shared",
+      "Packages": {
+        "$path": "packages"
+      }
+    },
+    "ServerScriptService": {
+      "$path": "src/server"
+    }
+  }
+}
