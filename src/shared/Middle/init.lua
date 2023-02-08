@@ -30,12 +30,26 @@ if (RunService:IsServer()) then
             end
         end
     end
+    function GlobalMiddle:LoadCommon(shared)
+        for _, __ in pairs(game:GetService('ReplicatedStorage'):WaitForChild('Packages'):GetChildren()) do
+            if __.Name == shared:lower() then
+                return require(__)
+            end
+        end
+    end
     return GlobalMiddle
 else
     local LocalMiddle = {}
     function LocalMiddle:LoadPackage(...)
         for _, __ in pairs(Middle.__deeplink.__local()) do
             if __.Name == ... then
+                return require(__)
+            end
+        end
+    end
+    function GlobalMiddle:LoadCommon(shared)
+        for _, __ in pairs(game:GetService('ReplicatedStorage'):WaitForChild('Packages'):GetChildren()) do
+            if __.Name == shared:lower() then
                 return require(__)
             end
         end
