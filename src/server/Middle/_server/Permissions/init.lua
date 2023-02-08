@@ -5,10 +5,10 @@ local Promise = Middle:LoadCommon('Promise')
 
 local Permissions = {}
 Permissions.type = {
-    Group = require(script:WaitForChild('Group')),
-    Class = require(script:WaitForChild('Class')),
-    Team = require(script:WaitForChild('Team')),
-    User = require(script:WaitForChild('User'))
+    Group = require(script.Types:WaitForChild('Group')),
+    Class = require(script.Types:WaitForChild('Class')),
+    Team = require(script.Types:WaitForChild('Team')),
+    User = require(script.Types:WaitForChild('User'))
 }
 
 --////////////////////////////////////////////
@@ -33,7 +33,7 @@ function Permissions.new(User, Data): thread
         Data = { Data }
     end
 
-    return Promise.new(function(resolve)
+    return Promise.new(function(resolve, reject)
         for __, PermissionSegment: string | {} in pairs(Data) do
             if typeof(PermissionSegment) == 'table' then
                 assert(__ - 1 > 0, 'You cannot issue a subsidiary permission segment without a definer(condition) statement.')
@@ -51,7 +51,7 @@ function Permissions.new(User, Data): thread
                 end
             end
         end
-        resolve(false)
+        reject()
     end)
 end
 
